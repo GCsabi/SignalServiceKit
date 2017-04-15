@@ -6,6 +6,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface OWSFakeMessageSender ()
+
+// mark as available, since its NS_UNAVAILABLE in superclass
+- (instancetype)init;
+
+@end
+
 @implementation OWSFakeMessageSender
 
 - (instancetype)initWithExpectation:(XCTestExpectation *)expectation
