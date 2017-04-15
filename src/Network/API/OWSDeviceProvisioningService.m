@@ -1,4 +1,6 @@
-//  Copyright © 2016 Open Whisper Systems. All rights reserved.
+//
+//  Copyright (c) 2017 Open Whisper Systems. All rights reserved.
+//
 
 #import "OWSDeviceProvisioningService.h"
 #import "OWSDeviceProvisioningRequest.h"
@@ -8,13 +10,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OWSDeviceProvisioningService ()
 
-@property (nonatomic, readonly) TSNetworkManager *networkManager;
+@property (nonatomic, readonly) id<TSNetworkManager> networkManager;
 
 @end
 
 @implementation OWSDeviceProvisioningService
 
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager
+// FIXME add sharedInstance and assertSingleton
+
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
 {
     self = [super init];
     if (!self) {
@@ -28,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init
 {
-    return [self initWithNetworkManager:[TSNetworkManager sharedManager]];
+    return [self initWithNetworkManager:[TSNetworkManagerImpl sharedManager]];
 }
 
 - (void)provisionWithMessageBody:(NSData *)messageBody

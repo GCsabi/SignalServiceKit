@@ -11,7 +11,7 @@ extern NSString *const TSRegistrationErrorDomain;
 extern NSString *const TSRegistrationErrorUserInfoHTTPStatus;
 extern NSString *const kNSNotificationName_RegistrationStateDidChange;
 
-@class TSNetworkManager;
+@protocol TSNetworkManager;
 @class TSStorageManager;
 
 @interface TSAccountManager : NSObject
@@ -20,12 +20,13 @@ extern NSString *const kNSNotificationName_RegistrationStateDidChange;
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
                         storageManager:(TSStorageManager *)storageManager;
 
 + (instancetype)sharedInstance;
 
-@property (nonatomic, strong, readonly) TSNetworkManager *networkManager;
+// TODO can this be private?
+@property (nonatomic, strong, readonly) id<TSNetworkManager> networkManager;
 
 /**
  *  Returns if a user is registered or not

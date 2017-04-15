@@ -164,7 +164,8 @@ NS_ASSUME_NONNULL_BEGIN
       NSArray *hashes = [phoneNumbersByHashes allKeys];
 
       TSRequest *request = [[TSContactsIntersectionRequest alloc] initWithHashesArray:hashes];
-      [[TSNetworkManager sharedManager] makeRequest:request
+      // TODO inject networkManager dependency
+      [[TSNetworkManagerImpl sharedManager] makeRequest:request
           success:^(NSURLSessionDataTask *tsTask, id responseDict) {
             NSMutableDictionary *attributesForIdentifier = [NSMutableDictionary dictionary];
             NSArray *contactsArray                       = [(NSDictionary *)responseDict objectForKey:@"contacts"];

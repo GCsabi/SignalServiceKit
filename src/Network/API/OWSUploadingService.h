@@ -6,8 +6,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol TSNetworkManager;
 @class TSOutgoingMessage;
-@class TSNetworkManager;
 @class TSAttachmentStream;
 
 extern NSString *const kAttachmentUploadProgressNotification;
@@ -16,8 +16,10 @@ extern NSString *const kAttachmentUploadAttachmentIDKey;
 
 @interface OWSUploadingService : NSObject
 
+// FIXME add sharedManager and assertSingleton
+
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager NS_DESIGNATED_INITIALIZER;
 
 - (void)uploadAttachmentStream:(TSAttachmentStream *)attachmentStream
                        message:(TSOutgoingMessage *)outgoingMessage

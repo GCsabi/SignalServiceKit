@@ -30,7 +30,7 @@ NSString *const kNSNotificationName_RegistrationStateDidChange = @"kNSNotificati
 
 @implementation TSAccountManager
 
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
                         storageManager:(TSStorageManager *)storageManager
 {
     self = [super init];
@@ -51,7 +51,7 @@ NSString *const kNSNotificationName_RegistrationStateDidChange = @"kNSNotificati
     static dispatch_once_t onceToken;
     static id sharedInstance = nil;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[self alloc] initWithNetworkManager:[TSNetworkManager sharedManager]
+        sharedInstance = [[self alloc] initWithNetworkManager:[TSNetworkManagerImpl sharedManager]
                                                storageManager:[TSStorageManager sharedManager]];
     });
 
@@ -149,8 +149,9 @@ NSString *const kNSNotificationName_RegistrationStateDidChange = @"kNSNotificati
     // we make our verification code request.
     TSAccountManager *manager = [self sharedInstance];
     manager.phoneNumberAwaitingVerification = phoneNumber;
-    
-    [[TSNetworkManager sharedManager]
+
+    // TODO convert to instance method and inject network manager dependency
+    [[TSNetworkManagerImpl sharedManager]
         makeRequest:[[TSRequestVerificationCodeRequest alloc]
                         initWithPhoneNumber:phoneNumber
                                   transport:isSMS ? TSVerificationTransportSMS : TSVerificationTransportVoice]
@@ -266,7 +267,8 @@ NSString *const kNSNotificationName_RegistrationStateDidChange = @"kNSNotificati
 
 + (void)unregisterTextSecureWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failureBlock
 {
-    [[TSNetworkManager sharedManager] makeRequest:[[TSUnregisterAccountRequest alloc] init]
+    // TODO move to instance method and inject network manager dependency
+    [[TSNetworkManagerImpl sharedManager] makeRequest:[[TSUnregisterAccountRequest alloc] init]
         success:^(NSURLSessionDataTask *task, id responseObject) {
             DDLogInfo(@"%@ Successfully unregistered", self.tag);
             success();

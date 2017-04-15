@@ -278,7 +278,7 @@ NSString *const OWSMessageSenderRateLimitedException = @"RateLimitedException";
 
 @interface OWSMessageSender ()
 
-@property (nonatomic, readonly) TSNetworkManager *networkManager;
+@property (nonatomic, readonly) id<TSNetworkManager> networkManager;
 @property (nonatomic, readonly) TSStorageManager *storageManager;
 @property (nonatomic, readonly) OWSBlockingManager *blockingManager;
 @property (nonatomic, readonly) OWSUploadingService *uploadingService;
@@ -292,7 +292,7 @@ NSString *const OWSMessageSenderRateLimitedException = @"RateLimitedException";
 
 @implementation OWSMessageSender
 
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
                         storageManager:(TSStorageManager *)storageManager
                        contactsManager:(id<ContactsManagerProtocol>)contactsManager
                        contactsUpdater:(ContactsUpdater *)contactsUpdater

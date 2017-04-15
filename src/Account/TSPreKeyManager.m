@@ -147,7 +147,8 @@ static const CGFloat kSignedPreKeyUpdateFailureMaxFailureDuration = 10 * 24 * 60
             request = [[TSRegisterSignedPrekeyRequest alloc] initWithSignedPreKeyRecord:signedPreKey];
         }
 
-        [[TSNetworkManager sharedManager] makeRequest:request
+        // TODO convert to instance method and inject network manager depenency
+        [[TSNetworkManagerImpl sharedManager] makeRequest:request
             success:^(NSURLSessionDataTask *task, id responseObject) {
                 DDLogInfo(@"%@ Successfully registered %@.", self.tag, description);
 
@@ -191,7 +192,9 @@ static const CGFloat kSignedPreKeyUpdateFailureMaxFailureDuration = 10 * 24 * 60
     //
     // We do not need a "one-time only" mode.
     TSAvailablePreKeysCountRequest *preKeyCountRequest = [[TSAvailablePreKeysCountRequest alloc] init];
-    [[TSNetworkManager sharedManager] makeRequest:preKeyCountRequest
+
+    // TODO convert to instance method and inject network manager depenency
+    [[TSNetworkManagerImpl sharedManager] makeRequest:preKeyCountRequest
         success:^(NSURLSessionDataTask *task, NSDictionary *responseObject) {
             NSString *preKeyCountKey = @"count";
             NSNumber *count = [responseObject objectForKey:preKeyCountKey];
@@ -253,7 +256,9 @@ static const CGFloat kSignedPreKeyUpdateFailureMaxFailureDuration = 10 * 24 * 60
                 // agree with the service's "current signed key" state.  Let's verify that,
                 // since it's closely related to the issues we saw with the 2.7.0.10 release.
                 TSRequest *currentSignedPreKey = [[TSCurrentSignedPreKeyRequest alloc] init];
-                [[TSNetworkManager sharedManager] makeRequest:currentSignedPreKey
+
+                // TODO convert to instance method and inject network manager depenency
+                [[TSNetworkManagerImpl sharedManager] makeRequest:currentSignedPreKey
                     success:^(NSURLSessionDataTask *task, NSDictionary *responseObject) {
                         NSString *keyIdDictKey = @"keyId";
                         NSNumber *keyId = [responseObject objectForKey:keyIdDictKey];

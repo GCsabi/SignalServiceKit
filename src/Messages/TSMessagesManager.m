@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initDefault
 {
-    TSNetworkManager *networkManager = [TSNetworkManager sharedManager];
+    id<TSNetworkManager> networkManager = [TSNetworkManagerImpl sharedManager];
     TSStorageManager *storageManager = [TSStorageManager sharedManager];
     id<ContactsManagerProtocol> contactsManager = [TextSecureKitEnv sharedEnv].contactsManager;
     id<OWSCallMessageHandler> callMessageHandler = [TextSecureKitEnv sharedEnv].callMessageHandler;
@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
                           messageSender:messageSender];
 }
 
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
                         storageManager:(TSStorageManager *)storageManager
                     callMessageHandler:(id<OWSCallMessageHandler>)callMessageHandler
                        contactsManager:(id<ContactsManagerProtocol>)contactsManager

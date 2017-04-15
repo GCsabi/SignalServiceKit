@@ -23,19 +23,20 @@ static const CGFloat kAttachmentUploadProgressTheta = 0.001f;
 
 @interface OWSUploadingService ()
 
-@property (nonatomic, readonly) TSNetworkManager *networkManager;
+@property (nonatomic, readonly) id<TSNetworkManager> networkManager;
 
 @end
 
 @implementation OWSUploadingService
 
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
 {
     self = [super init];
     if (!self) {
         return self;
     }
 
+    // TODO assert singleton
     _networkManager = networkManager;
 
     return self;

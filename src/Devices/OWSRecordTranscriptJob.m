@@ -1,5 +1,6 @@
-//  Created by Michael Kirk on 9/23/16.
-//  Copyright © 2016 Open Whisper Systems. All rights reserved.
+//
+//  Copyright (c) 2017 Open Whisper Systems. All rights reserved.
+//
 
 #import "OWSRecordTranscriptJob.h"
 #import "OWSAttachmentsProcessor.h"
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) OWSIncomingSentMessageTranscript *incomingSentMessageTranscript;
 @property (nonatomic, readonly) OWSMessageSender *messageSender;
-@property (nonatomic, readonly) TSNetworkManager *networkManager;
+@property (nonatomic, readonly) id<TSNetworkManager> networkManager;
 
 @end
 
@@ -23,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithIncomingSentMessageTranscript:(OWSIncomingSentMessageTranscript *)incomingSentMessageTranscript
                                         messageSender:(OWSMessageSender *)messageSender
-                                       networkManager:(TSNetworkManager *)networkManager
+                                       networkManager:(id<TSNetworkManager>)networkManager
 {
     self = [super init];
     if (!self) {

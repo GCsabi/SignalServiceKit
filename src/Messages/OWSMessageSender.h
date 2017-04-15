@@ -9,11 +9,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class SignalRecipient;
 @class OWSBlockingManager;
 @class TSInvalidIdentityKeySendingErrorMessage;
-@class TSNetworkManager;
 @class TSOutgoingMessage;
 @class TSStorageManager;
 @class TSThread;
 @protocol ContactsManagerProtocol;
+@protocol TSNetworkManager;
 
 /**
  * Useful for when you *sometimes* want to retry before giving up and calling the failure handler
@@ -34,7 +34,7 @@ NS_SWIFT_NAME(MessageSender)
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
                         storageManager:(TSStorageManager *)storageManager
                        contactsManager:(id<ContactsManagerProtocol>)contactsManager
                        contactsUpdater:(ContactsUpdater *)contactsUpdater;

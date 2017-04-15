@@ -1,4 +1,6 @@
-//  Copyright © 2016 Open Whisper Systems. All rights reserved.
+//
+//  Copyright (c) 2017 Open Whisper Systems. All rights reserved.
+//
 
 #import "OWSDeviceProvisioningCodeService.h"
 #import "OWSDeviceProvisioningCodeRequest.h"
@@ -10,13 +12,15 @@ NSString *const OWSDeviceProvisioningCodeServiceProvisioningCodeKey = @"verifica
 
 @interface OWSDeviceProvisioningCodeService ()
 
-@property (readonly) TSNetworkManager *networkManager;
+@property (nonatomic, readonly) id<TSNetworkManager> networkManager;
 
 @end
 
 @implementation OWSDeviceProvisioningCodeService
 
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager
+// FIXME - use sharedInstance and assertSingleton
+
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
 {
 
     self = [super init];
@@ -31,7 +35,7 @@ NSString *const OWSDeviceProvisioningCodeServiceProvisioningCodeKey = @"verifica
 
 - (instancetype)init
 {
-    return [self initWithNetworkManager:[TSNetworkManager sharedManager]];
+    return [self initWithNetworkManager:[TSNetworkManagerImpl sharedManager]];
 }
 
 - (void)requestProvisioningCodeWithSuccess:(void (^)(NSString *))successCallback

@@ -1,12 +1,14 @@
-//  Copyright © 2016 Open Whisper Systems. All rights reserved.
+//
+//  Copyright (c) 2017 Open Whisper Systems. All rights reserved.
+//
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TSNetworkManager;
+@protocol TSNetworkManager;
 
 @interface OWSDeviceProvisioningService : NSObject
 
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager;
+- (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager;
 
 - (void)provisionWithMessageBody:(NSData *)messageBody
                ephemeralDeviceId:(NSString *)deviceId

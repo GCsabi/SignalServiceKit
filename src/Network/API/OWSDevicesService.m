@@ -1,4 +1,6 @@
-//  Copyright © 2016 Open Whisper Systems. All rights reserved.
+//
+//  Copyright (c) 2017 Open Whisper Systems. All rights reserved.
+//
 
 #import "OWSDevicesService.h"
 #import "OWSDeleteDeviceRequest.h"
@@ -16,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
                       failure:(void (^)(NSError *))failureCallback
 {
     OWSGetDevicesRequest *request = [OWSGetDevicesRequest new];
-    [[TSNetworkManager sharedManager] makeRequest:request
+
+    // TODO inject networkManager dependency
+    [[TSNetworkManagerImpl sharedManager] makeRequest:request
         success:^(NSURLSessionDataTask *task, id responseObject) {
             DDLogVerbose(@"Get devices request succeeded");
             NSArray<OWSDevice *> *devices = [self parseResponse:responseObject];
@@ -41,7 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 {
     OWSDeleteDeviceRequest *request = [[OWSDeleteDeviceRequest alloc] initWithDevice:device];
 
-    [[TSNetworkManager sharedManager] makeRequest:request
+    // TODO inject networkManager dependency
+    [[TSNetworkManagerImpl sharedManager] makeRequest:request
         success:^(NSURLSessionDataTask *task, id responseObject) {
             DDLogVerbose(@"Delete device request succeeded");
             successCallback();

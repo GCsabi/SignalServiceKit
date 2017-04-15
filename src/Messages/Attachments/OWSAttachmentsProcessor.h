@@ -1,13 +1,15 @@
-//  Copyright © 2016 Open Whisper Systems. All rights reserved.
+//
+//  Copyright (c) 2017 Open Whisper Systems. All rights reserved.
+//
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class TSMessage;
 @class TSThread;
-@class TSNetworkManager;
 @class OWSSignalServiceProtosAttachmentPointer;
 @class TSAttachmentStream;
 @class TSAttachmentPointer;
+@protocol TSNetworkManager;
 
 /**
  * Given incoming attachment protos, determines which we support.
@@ -25,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
                                timestamp:(uint64_t)timestamp
                                    relay:(nullable NSString *)relay
                                   thread:(TSThread *)thread
-                          networkManager:(TSNetworkManager *)networkManager NS_DESIGNATED_INITIALIZER;
+                          networkManager:(id<TSNetworkManager>)networkManager NS_DESIGNATED_INITIALIZER;
 
 /*
  * Retry fetching failed attachment download
  */
 - (instancetype)initWithAttachmentPointer:(TSAttachmentPointer *)attachmentPointer
-                           networkManager:(TSNetworkManager *)networkManager NS_DESIGNATED_INITIALIZER;
+                           networkManager:(id<TSNetworkManager>)networkManager NS_DESIGNATED_INITIALIZER;
 
 - (void)fetchAttachmentsForMessage:(nullable TSMessage *)message
                            success:(void (^)(TSAttachmentStream *attachmentStream))successHandler

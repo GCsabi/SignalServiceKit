@@ -12,19 +12,20 @@
 
 NSString *const TSNetworkManagerDomain = @"org.whispersystems.signal.networkManager";
 
-@interface TSNetworkManager ()
+@interface TSNetworkManagerImpl ()
 
 @property (nonatomic, readonly, strong) OWSSignalService *signalService;
 typedef void (^failureBlock)(NSURLSessionDataTask *task, NSError *error);
 
 @end
 
-@implementation TSNetworkManager
+@implementation TSNetworkManagerImpl
 
 #pragma mark Singleton implementation
 
-+ (id)sharedManager {
-    static TSNetworkManager *sharedMyManager = nil;
++ (instancetype)sharedManager
+{
+    static TSNetworkManagerImpl *sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         OWSSignalService *signalService = [[OWSSignalService alloc] init];
@@ -57,7 +58,7 @@ typedef void (^failureBlock)(NSURLSessionDataTask *task, NSError *error);
     DDLogInfo(@"%@ Making request: %@", self.tag, request);
 
     void (^failure)(NSURLSessionDataTask *task, NSError *error) =
-        [TSNetworkManager errorPrettifyingForFailureBlock:failureBlock];
+        [[self class] errorPrettifyingForFailureBlock:failureBlock];
 
     AFHTTPSessionManager *sessionManager = self.signalService.HTTPSessionManager;
 

@@ -23,9 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TSMessagesManager (Testing)
 
-// Private init for stubbing dependencies
-
-- (instancetype)initWithNetworkManager:(TSNetworkManager *)networkManager
+// Expose private init for stubbing dependencies
+- (instancetype)initWithNetworkManager:(id <TSNetworkManager>)networkManager
                         storageManager:(TSStorageManager *)storageManager
                     callMessageHandler:(id<OWSCallMessageHandler>)callMessageHandler
                        contactsManager:(id<ContactsManagerProtocol>)contactsManager

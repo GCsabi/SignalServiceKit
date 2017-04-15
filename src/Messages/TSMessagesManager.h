@@ -8,7 +8,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TSNetworkManager;
 @class TSStorageManager;
 @class OWSSignalServiceProtosEnvelope;
 @class OWSSignalServiceProtosDataMessage;
@@ -17,14 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 @class OWSMessageSender;
 @protocol ContactsManagerProtocol;
 @protocol OWSCallMessageHandler;
+@protocol TSNetworkManager;
 
 @interface TSMessagesManager : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)sharedManager;
 
+// TODO can these be private?
 @property (nonatomic, readonly) YapDatabaseConnection *dbConnection;
-@property (nonatomic, readonly) TSNetworkManager *networkManager;
+@property (nonatomic, readonly) id<TSNetworkManager> networkManager;
 @property (nonatomic, readonly) ContactsUpdater *contactsUpdater;
 
 - (void)handleReceivedEnvelope:(OWSSignalServiceProtosEnvelope *)envelope;

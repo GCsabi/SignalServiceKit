@@ -22,19 +22,22 @@
 #import <AFNetworking/AFHTTPSessionManager.h>
 #import <Foundation/Foundation.h>
 
-extern NSString *const TSNetworkManagerDomain;
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TSNetworkManager : NSObject
+extern NSString *const TSNetworkManagerDomain;
 
-- (instancetype)init NS_UNAVAILABLE;
-
-+ (id)sharedManager;
+@protocol TSNetworkManager <NSObject>
 
 - (void)makeRequest:(TSRequest *)request
             success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure NS_SWIFT_NAME(makeRequest(_:success:failure:));
+
+@end
+
+@interface TSNetworkManagerImpl : NSObject <TSNetworkManager>
+
+- (instancetype)init NS_UNAVAILABLE;
++ (id)sharedManager;
 
 @end
 

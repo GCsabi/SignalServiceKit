@@ -213,14 +213,14 @@ NS_ASSUME_NONNULL_BEGIN
     OWSFakeContactsUpdater *contactsUpdater = [OWSFakeContactsUpdater new];
 
     // Successful Sending
-    TSNetworkManager *successfulNetworkManager = [[OWSMessageSenderFakeNetworkManager alloc] initWithSuccess:YES];
+    id<TSNetworkManager> successfulNetworkManager = [[OWSMessageSenderFakeNetworkManager alloc] initWithSuccess:YES];
     self.successfulMessageSender = [[OWSMessageSender alloc] initWithNetworkManager:successfulNetworkManager
                                                                      storageManager:storageManager
                                                                     contactsManager:contactsManager
                                                                     contactsUpdater:contactsUpdater];
 
     // Unsuccessful Sending
-    TSNetworkManager *unsuccessfulNetworkManager = [[OWSMessageSenderFakeNetworkManager alloc] initWithSuccess:NO];
+    id<TSNetworkManager> unsuccessfulNetworkManager = [[OWSMessageSenderFakeNetworkManager alloc] initWithSuccess:NO];
     self.unsuccessfulMessageSender = [[OWSMessageSender alloc] initWithNetworkManager:unsuccessfulNetworkManager
                                                                        storageManager:storageManager
                                                                       contactsManager:contactsManager

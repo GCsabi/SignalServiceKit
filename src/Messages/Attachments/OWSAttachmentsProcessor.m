@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OWSAttachmentsProcessor ()
 
-@property (nonatomic, readonly) TSNetworkManager *networkManager;
+@property (nonatomic, readonly) id<TSNetworkManager> networkManager;
 @property (nonatomic, readonly) NSArray<TSAttachmentPointer *> *supportedAttachmentPointers;
 
 @end
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation OWSAttachmentsProcessor
 
 - (instancetype)initWithAttachmentPointer:(TSAttachmentPointer *)attachmentPointer
-                           networkManager:(TSNetworkManager *)networkManager
+                           networkManager:(id<TSNetworkManager>)networkManager
 {
     self = [super init];
     if (!self) {
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
                                timestamp:(uint64_t)timestamp
                                    relay:(nullable NSString *)relay
                                   thread:(TSThread *)thread
-                          networkManager:(TSNetworkManager *)networkManager
+                          networkManager:(id<TSNetworkManager>)networkManager
 {
     self = [super init];
     if (!self) {
