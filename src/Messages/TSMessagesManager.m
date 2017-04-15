@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
     TSStorageManager *storageManager = [TSStorageManager sharedManager];
     id<ContactsManagerProtocol> contactsManager = [TextSecureKitEnv sharedEnv].contactsManager;
     id<OWSCallMessageHandler> callMessageHandler = [TextSecureKitEnv sharedEnv].callMessageHandler;
-    ContactsUpdater *contactsUpdater = [ContactsUpdater sharedUpdater];
+    id<ContactsUpdater> contactsUpdater = [ContactsUpdaterImpl sharedUpdater];
     OWSMessageSender *messageSender = [TextSecureKitEnv sharedEnv].messageSender;
 
     return [self initWithNetworkManager:networkManager
@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
                         storageManager:(TSStorageManager *)storageManager
                     callMessageHandler:(id<OWSCallMessageHandler>)callMessageHandler
                        contactsManager:(id<ContactsManagerProtocol>)contactsManager
-                       contactsUpdater:(ContactsUpdater *)contactsUpdater
+                       contactsUpdater:(id<ContactsUpdater>)contactsUpdater
                          messageSender:(OWSMessageSender *)messageSender
 {
     self = [super init];

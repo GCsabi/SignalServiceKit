@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OWSMessageSender (Testing)
 
 @property (nonatomic) OWSUploadingService *uploadingService;
-@property (nonatomic) ContactsUpdater *contactsUpdater;
+@property (nonatomic) id<ContactsUpdater> contactsUpdater;
 
 // Private Methods to test
 - (NSArray<SignalRecipient *> *)getRecipients:(NSArray<NSString *> *)identifiers error:(NSError **)error;
@@ -44,12 +44,12 @@ NS_ASSUME_NONNULL_BEGIN
     return @[];
 }
 
-- (void)setContactsUpdater:(ContactsUpdater *)contactsUpdater
+- (void)setContactsUpdater:(id<ContactsUpdater>)contactsUpdater
 {
     _contactsUpdater = contactsUpdater;
 }
 
-- (ContactsUpdater *)contactsUpdater
+- (id<ContactsUpdater>)contactsUpdater
 {
     return _contactsUpdater;
 }
@@ -487,10 +487,7 @@ NS_ASSUME_NONNULL_BEGIN
     [recipient save];
 
     OWSMessageSender *messageSender = self.successfulMessageSender;
-
-    // At the time of writing this test, the ContactsUpdater was relying on global singletons. So if this test
-    // later fails due to network access that could be why.
-    messageSender.contactsUpdater = [ContactsUpdater sharedUpdater];
+    messageSender.contactsUpdater = [OWSFakeContactsUpdater new];
     NSError *error;
     NSArray<SignalRecipient *> *recipients = [messageSender getRecipients:@[ recipient.uniqueId ] error:&error];
 

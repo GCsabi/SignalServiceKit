@@ -96,7 +96,6 @@
         
         NSData *otherKey = [SecurityUtils generateRandomBytes:32];
         
-        [TextSecureKitEnv setSharedEnv:[OWSUnitTestEnvironment new]];
         XCTAssertTrue([[TSStorageManager sharedManager] isTrustedIdentityKey:otherKey recipientId:recipientId]);
         
         [testComplete fulfill];

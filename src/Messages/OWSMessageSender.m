@@ -284,7 +284,7 @@ NSString *const OWSMessageSenderRateLimitedException = @"RateLimitedException";
 @property (nonatomic, readonly) OWSUploadingService *uploadingService;
 @property (nonatomic, readonly) YapDatabaseConnection *dbConnection;
 @property (nonatomic, readonly) id<ContactsManagerProtocol> contactsManager;
-@property (nonatomic, readonly) ContactsUpdater *contactsUpdater;
+@property (nonatomic, readonly) id<ContactsUpdater> contactsUpdater;
 @property (nonatomic, readonly) OWSDisappearingMessagesJob *disappearingMessagesJob;
 @property (atomic, readonly) NSMutableDictionary<NSString *, NSOperationQueue *> *sendingQueueMap;
 
@@ -295,7 +295,7 @@ NSString *const OWSMessageSenderRateLimitedException = @"RateLimitedException";
 - (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
                         storageManager:(TSStorageManager *)storageManager
                        contactsManager:(id<ContactsManagerProtocol>)contactsManager
-                       contactsUpdater:(ContactsUpdater *)contactsUpdater
+                       contactsUpdater:(id<ContactsUpdater>)contactsUpdater
 {
     self = [super init];
     if (!self) {

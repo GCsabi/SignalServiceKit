@@ -42,7 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
         [recipient saveWithTransaction:transaction];
 
         // Update recipient with Server record async.
-        [[ContactsUpdater sharedUpdater] lookupIdentifier:contactId
+        // TODO inject this as <ContactsUpdater> dependency. Maybe this method should live on an instance of
+        // ContactThreadFactory?
+        [[ContactsUpdaterImpl sharedUpdater] lookupIdentifier:contactId
             success:^(SignalRecipient *recipient) {
             }
             failure:^(NSError *error) {

@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation ContactsUpdater
+@implementation ContactsUpdaterImpl
 
 + (instancetype)sharedUpdater {
     static dispatch_once_t onceToken;

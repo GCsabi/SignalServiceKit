@@ -4,7 +4,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ContactsUpdater;
 @class OWSUploadingService;
 @class SignalRecipient;
 @class OWSBlockingManager;
@@ -13,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class TSStorageManager;
 @class TSThread;
 @protocol ContactsManagerProtocol;
+@protocol ContactsUpdater;
 @protocol TSNetworkManager;
 
 /**
@@ -29,7 +29,7 @@ NS_SWIFT_NAME(MessageSender)
 
     // For subclassing in tests
     OWSUploadingService *_uploadingService;
-    ContactsUpdater *_contactsUpdater;
+    id<ContactsUpdater> _contactsUpdater;
 }
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -37,7 +37,7 @@ NS_SWIFT_NAME(MessageSender)
 - (instancetype)initWithNetworkManager:(id<TSNetworkManager>)networkManager
                         storageManager:(TSStorageManager *)storageManager
                        contactsManager:(id<ContactsManagerProtocol>)contactsManager
-                       contactsUpdater:(ContactsUpdater *)contactsUpdater;
+                       contactsUpdater:(id<ContactsUpdater>)contactsUpdater;
 
 - (void)setBlockingManager:(OWSBlockingManager *)blockingManager;
 
