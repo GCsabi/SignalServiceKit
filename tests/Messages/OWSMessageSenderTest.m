@@ -341,6 +341,7 @@ NS_ASSUME_NONNULL_BEGIN
     XCTestExpectation *markedAsSent = [self expectationWithDescription:@"markedAsSent"];
     [messageSender sendAttachmentData:[NSData new]
         contentType:@"image/gif"
+        filename:@"someFile.gif"
         inMessage:message
         success:^() {
             if (message.messageState == TSOutgoingMessageStateSent) {
@@ -394,6 +395,7 @@ NS_ASSUME_NONNULL_BEGIN
     XCTestExpectation *markedAsUnsent = [self expectationWithDescription:@"markedAsUnsent"];
     [messageSender sendAttachmentData:[NSData new]
         contentType:@"image/gif"
+        filename:@"someFile.gif"
         inMessage:message
         success:^{
             XCTFail(@"sendMessage should fail.");
@@ -422,6 +424,7 @@ NS_ASSUME_NONNULL_BEGIN
     XCTestExpectation *markedAsUnsent = [self expectationWithDescription:@"markedAsUnsent"];
     [messageSender sendAttachmentData:[NSData new]
         contentType:@"image/gif"
+        filename:@"someFile.gif"
         inMessage:message
         success:^{
             XCTFail(@"sendMessage should fail.");
