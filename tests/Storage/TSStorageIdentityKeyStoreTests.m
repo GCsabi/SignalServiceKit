@@ -1,9 +1,5 @@
 //
-//  TSStorageIdentityKeyStoreTests.m
-//  TextSecureKit
-//
-//  Created by Frederic Jacobs on 06/11/14.
-//  Copyright (c) 2014 Open Whisper Systems. All rights reserved.
+//  Copyright (c) 2017 Open Whisper Systems. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
@@ -15,6 +11,7 @@
 #import "TSStorageManager+IdentityKeyStore.h"
 #import "TSStorageManager.h"
 #import "TextSecureKitEnv.h"
+#import "OWSDispatch.h"
 
 @interface TSStorageIdentityKeyStoreTests : XCTestCase
 
@@ -44,9 +41,14 @@
     NSData *newKey = [SecurityUtils generateRandomBytes:32];
     NSString *recipientId = @"test@gmail.com";
     
-    [[TSStorageManager sharedManager] saveRemoteIdentity:newKey recipientId:recipientId];
+    XCTestExpectation *testComplete = [self expectationWithDescription:@"hasSafetyNumbers"];
+    dispatch_async([OWSDispatch sessionStoreQueue], ^{
+        [[TSStorageManager sharedManager] saveRemoteIdentity:newKey recipientId:recipientId];
+        XCTAssert([[TSStorageManager sharedManager] isTrustedIdentityKey:newKey recipientId:recipientId]);
+        [testComplete fulfill];
+    });
     
-    XCTAssert([[TSStorageManager sharedManager] isTrustedIdentityKey:newKey recipientId:recipientId]);
+    [self waitForExpectationsWithTimeout:1 handler:nil];
 }
 
 
@@ -59,13 +61,20 @@
     NSData *newKey = [SecurityUtils generateRandomBytes:32];
     NSString *recipientId = @"test@gmail.com";
 
-    [[TSStorageManager sharedManager] saveRemoteIdentity:newKey recipientId:recipientId];
+    XCTestExpectation *testComplete = [self expectationWithDescription:@"hasSafetyNumbers"];
+    dispatch_async([OWSDispatch sessionStoreQueue], ^{
+        [[TSStorageManager sharedManager] saveRemoteIdentity:newKey recipientId:recipientId];
+        
+        XCTAssert([[TSStorageManager sharedManager] isTrustedIdentityKey:newKey recipientId:recipientId]);
+        
+        NSData *otherKey = [SecurityUtils generateRandomBytes:32];
+        
+        XCTAssertFalse([[TSStorageManager sharedManager] isTrustedIdentityKey:otherKey recipientId:recipientId]);
+        
+        [testComplete fulfill];
+    });
     
-    XCTAssert([[TSStorageManager sharedManager] isTrustedIdentityKey:newKey recipientId:recipientId]);
-    
-    NSData *otherKey = [SecurityUtils generateRandomBytes:32];
-    
-    XCTAssertFalse([[TSStorageManager sharedManager] isTrustedIdentityKey:otherKey recipientId:recipientId]);
+    [self waitForExpectationsWithTimeout:1 handler:nil];
 }
 
 
@@ -78,14 +87,22 @@
     NSData *newKey = [SecurityUtils generateRandomBytes:32];
     NSString *recipientId = @"test@gmail.com";
 
-    [[TSStorageManager sharedManager] saveRemoteIdentity:newKey recipientId:recipientId];
-
-    XCTAssert([[TSStorageManager sharedManager] isTrustedIdentityKey:newKey recipientId:recipientId]);
-
-    NSData *otherKey = [SecurityUtils generateRandomBytes:32];
-
-    [TextSecureKitEnv setSharedEnv:[OWSUnitTestEnvironment new]];
-    XCTAssertTrue([[TSStorageManager sharedManager] isTrustedIdentityKey:otherKey recipientId:recipientId]);
+    XCTestExpectation *testComplete = [self expectationWithDescription:@"hasSafetyNumbers"];
+    dispatch_async([OWSDispatch sessionStoreQueue], ^{
+        
+        [[TSStorageManager sharedManager] saveRemoteIdentity:newKey recipientId:recipientId];
+        
+        XCTAssert([[TSStorageManager sharedManager] isTrustedIdentityKey:newKey recipientId:recipientId]);
+        
+        NSData *otherKey = [SecurityUtils generateRandomBytes:32];
+        
+        [TextSecureKitEnv setSharedEnv:[OWSUnitTestEnvironment new]];
+        XCTAssertTrue([[TSStorageManager sharedManager] isTrustedIdentityKey:otherKey recipientId:recipientId]);
+        
+        [testComplete fulfill];
+    });
+    
+    [self waitForExpectationsWithTimeout:1 handler:nil];
 }
 
 - (void)testIdentityKey {

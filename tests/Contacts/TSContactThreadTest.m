@@ -1,8 +1,10 @@
-//  Created by Michael Kirk on 11/7/16.
-//  Copyright © 2016 Open Whisper Systems. All rights reserved.
+//
+//  Copyright (c) 2017 Open Whisper Systems. All rights reserved.
+//
 
 #import "TSContactThread.h"
 #import "TSStorageManager+identityKeyStore.h"
+#import "OWSDispatch.h"
 #import <XCTest/XCTest.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,9 +30,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)testHasSafetyNumbersWithRemoteIdentity
 {
-    [self.contactThread.storageManager saveRemoteIdentity:[NSData new]
-                                              recipientId:self.contactThread.contactIdentifier];
-    XCTAssert(self.contactThread.hasSafetyNumbers);
+    XCTestExpectation *hasSafetyNumbers = [self expectationWithDescription:@"hasSafetyNumbers"];    
+    dispatch_async([OWSDispatch sessionStoreQueue], ^{
+        [self.contactThread.storageManager saveRemoteIdentity:[NSData new]
+                                                  recipientId:self.contactThread.contactIdentifier];
+        if (self.contactThread.hasSafetyNumbers) {
+            [hasSafetyNumbers fulfill];
+        } else {
+            XCTFail(@"thread didn't have safety numbers");
+        }
+    });
+    
+    [self waitForExpectationsWithTimeout:1 handler:nil];
 }
 
 @end
