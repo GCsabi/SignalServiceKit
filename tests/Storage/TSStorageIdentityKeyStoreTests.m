@@ -4,8 +4,6 @@
 
 #import <XCTest/XCTest.h>
 #import <25519/Curve25519.h>
-
-#import "OWSUnitTestEnvironment.h"
 #import "SecurityUtils.h"
 #import "TSPrivacyPreferences.h"
 #import "TSStorageManager+IdentityKeyStore.h"

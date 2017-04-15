@@ -14,7 +14,6 @@
 #import "OWSFakeNetworkManager.h"
 #import "OWSMessageSender.h"
 #import "OWSSignalServiceProtos.pb.h"
-#import "OWSUnitTestEnvironment.h"
 #import "TSGroupThread.h"
 #import "TSMessagesManager.h"
 #import "TSNetworkManager.h"
@@ -84,8 +83,6 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *groupThreadId = [TSGroupThread threadIdFromGroupId:groupIdData];
     TSGroupThread *groupThread = [TSGroupThread fetchObjectWithUniqueID:groupThreadId];
     XCTAssertNil(groupThread);
-    // TODO currently messagesManager requires env via the "blocking" manager.
-    [TextSecureKitEnv setSharedEnv:[OWSUnitTestEnvironment new]];
     TSMessagesManager *messagesManager = [self messagesManagerWithSender:[OWSFakeMessageSender new]];
 
     OWSSignalServiceProtosEnvelopeBuilder *envelopeBuilder = [OWSSignalServiceProtosEnvelopeBuilder new];

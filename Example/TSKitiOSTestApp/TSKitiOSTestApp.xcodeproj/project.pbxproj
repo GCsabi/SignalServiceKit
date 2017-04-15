@@ -28,6 +28,7 @@
 		45458B7B1CC342B600A02153 /* CryptographyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45458B731CC342B600A02153 /* CryptographyTests.m */; };
 		45458B7C1CC342B600A02153 /* MessagePaddingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45458B741CC342B600A02153 /* MessagePaddingTests.m */; };
 		45731A6C1DA87AA1007E22AA /* TSOutgoingMessageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 45731A6B1DA87AA1007E22AA /* TSOutgoingMessageTest.m */; };
+		45766DBB1EA2B9D100CFB3B2 /* OWSTestRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45766DBA1EA2B9D100CFB3B2 /* OWSTestRunner.m */; };
 		459850C11D22C6F2006FFEDB /* PhoneNumberTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 459850C01D22C6F2006FFEDB /* PhoneNumberTest.m */; };
 		45A856AC1D220BFF0056CD4D /* TSAttributesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A856AB1D220BFF0056CD4D /* TSAttributesTest.m */; };
 		45AE48491E072711004D96C2 /* OWSUnitTestEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 45AE48481E072711004D96C2 /* OWSUnitTestEnvironment.m */; };
@@ -89,6 +90,8 @@
 		45458B731CC342B600A02153 /* CryptographyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptographyTests.m; sourceTree = "<group>"; };
 		45458B741CC342B600A02153 /* MessagePaddingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePaddingTests.m; sourceTree = "<group>"; };
 		45731A6B1DA87AA1007E22AA /* TSOutgoingMessageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSOutgoingMessageTest.m; path = ../../../tests/Messages/Interactions/TSOutgoingMessageTest.m; sourceTree = "<group>"; };
+		45766DB91EA2B9D100CFB3B2 /* OWSTestRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OWSTestRunner.h; path = ../../../tests/OWSTestRunner.h; sourceTree = "<group>"; };
+		45766DBA1EA2B9D100CFB3B2 /* OWSTestRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OWSTestRunner.m; path = ../../../tests/OWSTestRunner.m; sourceTree = "<group>"; };
 		459850C01D22C6F2006FFEDB /* PhoneNumberTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneNumberTest.m; path = ../../../tests/Contacts/PhoneNumberTest.m; sourceTree = "<group>"; };
 		459FE0DA1D4AD49E00E1071A /* TSKitiOSTestApp-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TSKitiOSTestApp-Prefix.pch"; sourceTree = "<group>"; };
 		45A856AB1D220BFF0056CD4D /* TSAttributesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSAttributesTest.m; sourceTree = "<group>"; };
@@ -337,6 +340,8 @@
 				45458B6D1CC342B600A02153 /* Storage */,
 				45458B721CC342B600A02153 /* Util */,
 				B6273DF01C13A2E500738558 /* Info.plist */,
+				45766DB91EA2B9D100CFB3B2 /* OWSTestRunner.h */,
+				45766DBA1EA2B9D100CFB3B2 /* OWSTestRunner.m */,
 			);
 			path = TSKitiOSTestAppTests;
 			sourceTree = "<group>";
@@ -552,6 +557,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45766DBB1EA2B9D100CFB3B2 /* OWSTestRunner.m in Sources */,
 				45B840211D988DA100F9E938 /* OWSReadReceiptTest.m in Sources */,
 				45458B781CC342B600A02153 /* TSStorageIdentityKeyStoreTests.m in Sources */,
 				45B700971D9841E400269FFD /* OWSDisappearingMessagesConfigurationTest.m in Sources */,
