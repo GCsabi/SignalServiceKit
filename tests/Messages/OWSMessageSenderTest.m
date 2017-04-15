@@ -445,14 +445,10 @@ NS_ASSUME_NONNULL_BEGIN
     NSData *groupIdData = [Cryptography generateRandomBytes:32];
     SignalRecipient *successfulRecipient =
         [[SignalRecipient alloc] initWithTextSecureIdentifier:@"successful-recipient-id"
-                                                        relay:nil
-                                                supportsVoice:YES
-                                               supportsWebRTC:YES];
+                                                        relay:nil];
     SignalRecipient *successfulRecipient2 =
         [[SignalRecipient alloc] initWithTextSecureIdentifier:@"successful-recipient-id2"
-                                                        relay:nil
-                                                supportsVoice:YES
-                                               supportsWebRTC:YES];
+                                                        relay:nil];
 
     TSGroupModel *groupModel = [[TSGroupModel alloc]
         initWithTitle:@"group title"
@@ -484,9 +480,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)testGetRecipients
 {
     SignalRecipient *recipient = [[SignalRecipient alloc] initWithTextSecureIdentifier:@"fake-recipient-id"
-                                                                                 relay:nil
-                                                                         supportsVoice:YES
-                                                                        supportsWebRTC:YES];
+                                                                                 relay:nil];
     [recipient save];
 
     OWSMessageSender *messageSender = self.successfulMessageSender;
