@@ -17,6 +17,7 @@ PODS:
     - AFNetworking/NSURLSession
   - AxolotlKit (0.8.1):
     - 25519 (~> 2.0.1)
+    - CocoaLumberjack
     - HKDFKit (~> 0.0.3)
     - ProtocolBuffers (~> 1.9.8)
   - CocoaLumberjack (2.4.0):
@@ -28,7 +29,7 @@ PODS:
   - CocoaLumberjack/Extensions (2.4.0):
     - CocoaLumberjack/Default
   - HKDFKit (0.0.3)
-  - libPhoneNumber-iOS (0.9.4)
+  - libPhoneNumber-iOS (0.9.6)
   - Mantle (2.1.0):
     - Mantle/extobjc (= 2.1.0)
   - Mantle/extobjc (2.1.0)
@@ -118,7 +119,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AxolotlKit:
-    :commit: a3c843cc8a423c5924c663490978f81dba34d04e
+    :commit: bce663486ac34c70594deae8260b3cd29dd086e9
     :git: https://github.com/WhisperSystems/SignalProtocolKit.git
   SocketRocket:
     :commit: 877ac7438be3ad0b45ef5ca3969574e4b97112bf
@@ -127,10 +128,10 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   '25519': dc4bad7e2dbcbf1efa121068a705a44cd98c80fc
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AxolotlKit: 240c7d761e4b1be9c6de78ebec498aaeedc978f4
+  AxolotlKit: a9530d6835baae0f204b1f6b9dd79b7901176f0d
   CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
   HKDFKit: c058305d6f64b84f28c50bd7aa89574625bcb62a
-  libPhoneNumber-iOS: 63bab980d1fc9783d82d955800ac9d7c1d81fde3
+  libPhoneNumber-iOS: 36044ed9658b5c11ee3cb3011751e47251d34992
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
   ProtocolBuffers: d509225eb2ea43d9582a59e94348fcf86e2abd65
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -144,4 +145,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1a7633963dbcaa43f298949d83c42c1cd1dce940
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
