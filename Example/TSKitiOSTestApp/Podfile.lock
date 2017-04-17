@@ -106,14 +106,14 @@ PODS:
 
 DEPENDENCIES:
   - AxolotlKit (from `https://github.com/WhisperSystems/SignalProtocolKit.git`)
-  - SignalServiceKit (from `../../SignalServiceKit.podspec`)
+  - SignalServiceKit (from `../../`)
   - SocketRocket (from `https://github.com/facebook/SocketRocket.git`)
 
 EXTERNAL SOURCES:
   AxolotlKit:
     :git: https://github.com/WhisperSystems/SignalProtocolKit.git
   SignalServiceKit:
-    :path: "../../SignalServiceKit.podspec"
+    :path: "../../"
   SocketRocket:
     :git: https://github.com/facebook/SocketRocket.git
 
@@ -143,6 +143,6 @@ SPEC CHECKSUMS:
   UnionFind: c33be5adb12983981d6e827ea94fc7f9e370f52d
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
 
-PODFILE CHECKSUM: db14103d6b9f23bdff2eeb1bc67d6a55d727bed5
+PODFILE CHECKSUM: 99e7a5afc73541b3b553f71d2e516206d6b0bd28
 
 COCOAPODS: 1.2.1
