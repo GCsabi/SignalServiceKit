@@ -16,6 +16,7 @@ test: pod_install retest
 
 pod_install:
 	cd $(WORKING_DIR) && \
+		pod update libPhoneNumber-iOS && \
 		pod install
 
 build: pod_install
