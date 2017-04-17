@@ -49,7 +49,7 @@ NSCAssert(0, @"Assertion failed: %s", CONVERT_EXPR_TO_STRING(X)); \
 //
 // 1. Use OWSSingletonAssertFlag() outside the class definition.
 // 2. Use OWSSingletonAssertInit() in each initializer.
-#ifdef DEBUG
+#if defined(DEBUG) && !defined(OWS_RUNNING_TESTS)
 
 #define OWSSingletonAssertFlag() static BOOL _isSingletonCreated = NO;
 

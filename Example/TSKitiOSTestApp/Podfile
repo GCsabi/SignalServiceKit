@@ -11,3 +11,32 @@ target 'TSKitiOSTestApp' do
   end
 end
 
+# Without this configuration, tests will fail due to the Singleton assertions,
+# which we want in debug, but not testing.
+def configure_ssk_for_tests()
+  set_tests_env = false
+
+  post_install do |installer_representation|
+    installer_representation.pods_project.targets.each do |target|
+      if target.name == "SignalServiceKit"
+        target.build_configurations.each do |config|
+          if config.name == 'Debug'
+            if config.build_settings['GCC_PREPROCESSOR_DEFINITIONS']
+              config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'].push('OWS_RUNNING_TESTS=1')
+            else
+              config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = ['$(inherited)', 'OWS_RUNNING_TESTS=1']
+            end
+            set_tests_env = true
+          end
+        end
+      end
+    end
+
+    unless set_tests_env
+      # If this is failing it's possible cocoapods changed their xcode proj API, and we'll have to adapt the method.
+      puts "[!] Error - did not set OWS_RUNNING_TESTS=1 build configuration for SSK. Tests may fail. Inspect the Podfile to see what went wrong."
+    end
+  end
+end
+
+configure_ssk_for_tests()
